@@ -1,0 +1,40 @@
+# ide
+.idea
+.vscode
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+# *.py[cod]
+*.pyc
+*$py.class
+
+# celery beat schedule file
+celerybeat-schedule
+
+# Django stuff:
+*.log
+.static_storage/
+.media/
+local_settings.py
+static/
+media/
+log/
+geoData/
+# fixtures/
+docker/
+
+# migration files. git add  **/migrations/__init__.py their init files
+migrations/*
+migrations/
+!**migrations/__init__.py
+
+# images
+*.jpg
+*.jpeg
+*.png
+
+# other files
+*.bat
+*.sqlite*
+gunicorn.service.txt
+*.db
