@@ -4,7 +4,7 @@ from django.db import models
 class Category(models.Model):
     # short alphanumeric code for the category
     code = models.CharField(max_length=10,)
-    title = models.TextField()
+    title = models.TextField(unique=True)
 
     # keep track of date created
     created = models.DateTimeField(auto_now_add=True, db_index=True)
@@ -45,3 +45,9 @@ class Diagnosis(models.Model):
 
     # keep track of updates
     updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        unique_together = ('code', 'full_code')
+
+    def __str__(self):
+        return '{} - {}'.format(self.full_code, self.abbreviated_description)

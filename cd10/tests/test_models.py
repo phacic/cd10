@@ -48,6 +48,9 @@ class DiagnosisModelTests(TestCase):
         diag = Diagnosis.objects.first()
 
         self.assertEqual(diag.category_id, self.cat1.id)
+
+        # backward compatible should be true
+        self.assertTrue(diag.backward_compatible)
         self.assertIsNotNone(diag.created)
         self.assertIsNotNone(diag.updated)
 
