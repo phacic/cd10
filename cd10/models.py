@@ -25,6 +25,7 @@ class Diagnosis(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='diagnosis')
 
     # numerical code for the diagnosis
+    # we could add checks to check the the code is unique to the diagnosis category
     code = models.IntegerField(null=True)
 
     # full alphanumeric code for the diagnosis
