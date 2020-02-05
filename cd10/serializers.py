@@ -18,6 +18,7 @@ class CategorySerializerReadOnly(serializers.ModelSerializer):
 
 
 class DiagnosisSerializer(serializers.ModelSerializer):
+    # include category object
     category_detail = serializers.SerializerMethodField()
 
     class Meta:

@@ -88,6 +88,7 @@ DB_PASSWORD = os.environ.get('db_password', 'single')
 DB_HOST = os.environ.get('db_host', '127.0.0.1')
 DB_USER = os.environ.get('db_user', 'postgres')
 DB_NAME = os.environ.get('db_name', 'challenge')
+DB_PORT = os.environ.get('db_port', '5432')
 
 DATABASES = {
     'default': {
@@ -96,7 +97,7 @@ DATABASES = {
         'USER': DB_USER,
         'PASSWORD': DB_PASSWORD,
         'HOST': DB_HOST,
-        'PORT': '5432',
+        'PORT': DB_PORT,
     }
 }
 

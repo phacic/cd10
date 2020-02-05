@@ -1,5 +1,4 @@
 from rest_framework import viewsets
-import pprint
 
 from cd10 import serializers, models
 
@@ -18,7 +17,7 @@ class DiagnosisViewSet(viewsets.ModelViewSet):
     page_size = 20
 
     def get_queryset(self):
-        # return models.Diagnosis.objects.select_related('category').all()
+        """ so queryset is evaluated on every request """
         return models.Diagnosis.objects.select_related('category').all()
 
     def retrieve(self, request, *args, **kwargs):

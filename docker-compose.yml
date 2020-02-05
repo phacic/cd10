@@ -1,0 +1,68 @@
+# docker network create --gateway 172.16.2.1 --subnet 172.16.2.0/24 challenge-bridge
+
+# docker volume create --name=postgres_data_challenge
+# docker volume create --name=tmp
+
+version: '3'
+services:
+#  db:
+#    image: postgres:9-alpine
+#    container_name: postgresDB
+#    environment:
+#      POSTGRES_DB: challenge
+#      POSTGRES_USER: postgres
+#      POSTGRES_PASSWORD: single
+#    # restart: always
+#    expose:
+#      - "5432"
+#    ports:
+#      - 5432:5432
+#    networks:
+#      - challenge-bridge
+#    # on windows
+#    volumes:
+#      - postgres_data_challenge:/var/lib/postgresql/data
+
+  cd10:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: cd10-api
+    container_name: api
+    expose:
+      # - 8001
+      - 8000
+    ports:
+      - 8000:8000
+#    command: python manage.py runserver 0.0.0.0:8000 --settings=challenge.settings_prod
+    command: gunicorn -c challenge/gunicorn.py challenge.wsgi
+    environment:
+      - PYTHONPATH=.
+      - secret=4696709c1055463e9408f1f213ceb8e78756adc845174bfab39174161a4c146e
+      #      - settings=challenge.settings_prod
+      - DJANGO_SETTINGS_MODULE=challenge.settings_prod
+#      - db_host=db
+      - db_host=host.docker.internal
+      - db_user=postgres
+      - db_name=challenge
+      - db_password=single
+    volumes:
+      - e:/data/django/media:/code/media
+      - e:/data/django/static:/code/static
+      - e:/data/logs:/var/log/
+      - .:/code
+#    depends_on:
+#      - db
+    networks:
+      - challenge-bridge
+
+volumes:
+  postgres_data_challenge:
+    external: true
+  # for sockets
+  tmp:
+    external: true
+
+networks:
+  challenge-bridge:
+    external: true
