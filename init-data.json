@@ -1,0 +1,40 @@
+[
+{
+  "model": "cd10.category",
+  "pk": 1,
+  "fields": {
+    "code": "A00",
+    "title": "Cholera",
+    "created": "2020-02-04T11:50:06.322Z",
+    "updated": "2020-02-04T11:50:06.322Z"
+  }
+},
+{
+  "model": "cd10.diagnosis",
+  "pk": 1,
+  "fields": {
+    "category": 1,
+    "code": 0,
+    "full_code": "A000",
+    "abbreviated_description": "Cholera due to Vibrio cholerae 01, biovar cholerae",
+    "full_description": "Cholera due to Vibrio cholerae 01, biovar cholerae",
+    "backward_compatible": true,
+    "created": "2020-02-04T11:51:17.847Z",
+    "updated": "2020-02-04T11:51:17.847Z"
+  }
+},
+{
+  "model": "cd10.diagnosis",
+  "pk": 2,
+  "fields": {
+    "category": 1,
+    "code": 1,
+    "full_code": "A001",
+    "abbreviated_description": "Cholera due to Vibrio cholerae 01, biovar eltor",
+    "full_description": "Cholera due to Vibrio cholerae 01, biovar eltor",
+    "backward_compatible": true,
+    "created": "2020-02-04T14:24:03.193Z",
+    "updated": "2020-02-04T14:28:34.426Z"
+  }
+}
+]

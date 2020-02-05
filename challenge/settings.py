@@ -139,13 +139,7 @@ STATIC_URL = '/static/'
 
 # settings for drf
 REST_FRAMEWORK = {
-    # 'DEFAULT_RENDERER_CLASSES': [
-    #     'rest_framework.renderers.JSONRenderer',
-    # ],
-    # 'DEFAULT_PARSER_CLASSES': [
-    #     'rest_framework.parsers.JSONParser',
-    # ],
-
-    # default page size for pagination
-    # 'PAGE_SIZE': 20
 }
+
+# this is the absolute path to the folder within which we want our static files to be collected
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
