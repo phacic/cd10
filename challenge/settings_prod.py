@@ -37,3 +37,6 @@ CORS_ORIGIN_REGEX_WHITELIST = [
     '^http://127.0.0.1',  # allow all from localhost
     '^https://127.0.0.1',  # allow all from localhost
 ]
+
+# print email to console
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

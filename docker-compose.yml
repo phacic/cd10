@@ -21,6 +21,20 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
+  redis:
+    build:
+      context: ./redis
+      dockerfile: Dockerfile
+    command: redis-server --appendonly yes
+    expose:
+      - 6379
+    ports:
+      - 6379:6379
+    networks:
+      - challenge-bridge
+    volumes:
+      - e:/data/redis/r1:/data
+
   cd10:
     build:
       context: .
@@ -37,12 +51,13 @@ services:
       - PYTHONPATH=.
       - secret=4696709c1055463e9408f1f213ceb8e78756adc845174bfab39174161a4c146e
       #      - settings=challenge.settings_prod
-      - DJANGO_SETTINGS_MODULE=challenge.settings_prod
+      - DJANGO_SETTINGS_MODULE=challenge.settings
       - db_host=db
       # - db_host=host.docker.internal
       - db_user=postgres
       - db_name=challenge
       - db_password=single
+      - redis_host=redis
     volumes:
       - e:/data/django/media:/code/media
       - e:/data/django/static:/code/static
@@ -53,6 +68,24 @@ services:
     networks:
       - challenge-bridge
 
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    command: [nginx, '-g', 'daemon off;']
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - e:/data/django/media:/code/media
+      - e:/data/django/static:/code/static
+      - e:/data/logs:/var/log/
+      - tmp:/tmp
+    networks:
+      - challenge-bridge
+    ports:
+      - 80:80
+    depends_on:
+      - cd10
+  
 volumes:
   postgres_data:
     external: true
