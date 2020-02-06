@@ -155,13 +155,14 @@ REDIS_PW = os.environ.get('redis_pwd', None)
 # CACHE
 CACHES = {
     "default": {
-        "BACKEND": "django_redis.cache.RedisCache",
+        # "BACKEND": "django_redis.cache.RedisCache",
+        'BACKEND': 'redis_cache.RedisCache',
         "LOCATION": "redis://{host}:{port}/{db}".format(
             host=REDIS_HOST, port=REDIS_PORT, db=REDIS_CACHE_DB
         ),
         'KEY_PREFIX': 'ch-dev' if DEBUG else 'ch',
         "OPTIONS": {
-            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            # "CLIENT_CLASS": "django_redis.client.DefaultClient",
             "PASSWORD": REDIS_PW,
             # use the latest version of pickle
             'PICKLE_VERSION': -1,

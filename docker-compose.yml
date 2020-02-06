@@ -39,7 +39,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: cd10-api
+    image: cd10
     container_name: api
     expose:
       - 8000
@@ -51,7 +51,7 @@ services:
       - PYTHONPATH=.
       - secret=4696709c1055463e9408f1f213ceb8e78756adc845174bfab39174161a4c146e
       #      - settings=challenge.settings_prod
-      - DJANGO_SETTINGS_MODULE=challenge.settings
+      - DJANGO_SETTINGS_MODULE=challenge.settings_prod
       - db_host=db
       # - db_host=host.docker.internal
       - db_user=postgres

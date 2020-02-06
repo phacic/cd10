@@ -40,3 +40,37 @@ CORS_ORIGIN_REGEX_WHITELIST = [
 
 # print email to console
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# ==============
+# redis
+# ==============
+REDIS_HOST = os.environ.get('redis_host', '127.0.0.1')
+REDIS_PORT = 6379
+REDIS_CACHE_DB = 0
+REDIS_PW = os.environ.get('redis_pwd', None)
+
+# CACHE
+CACHES = {
+    "default": {
+        # "BACKEND": "django_redis.cache.RedisCache",
+        'BACKEND': 'redis_cache.RedisCache',
+        "LOCATION": "redis://{host}:{port}/{db}".format(
+            host=REDIS_HOST, port=REDIS_PORT, db=REDIS_CACHE_DB
+        ),
+        'KEY_PREFIX': 'ch-dev' if DEBUG else 'ch',
+        "OPTIONS": {
+            # "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            "PASSWORD": REDIS_PW,
+            # use the latest version of pickle
+            'PICKLE_VERSION': -1,
+            # prevent exceptions when redis is down
+            "IGNORE_EXCEPTIONS": True,
+            'PARSER_CLASS': 'redis.connection.HiredisParser',
+            'CONNECTION_POOL_CLASS': 'redis.BlockingConnectionPool',
+            'CONNECTION_POOL_CLASS_KWARGS': {
+                'max_connections': 100,
+                'timeout': 20,
+            },
+        }
+    }
+}
