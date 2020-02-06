@@ -109,3 +109,8 @@ data structure returned
 
 ## caching
 Cache is applied to reduce the request time for resources where applicable. Since the data does not change often it is advisable to cache the data so we don't hit the database on each request.
+
+
+# DEVELOPMENT
+
+Redis server has to be accessible to get cache working in development.
