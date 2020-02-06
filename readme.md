@@ -14,6 +14,7 @@ to create network on docker for the containers to run on
 ## First Run
 
 **1 - run the server on docker**
+
     $ docker-compose up
 
 wait for all the builds to complete then terminate with `CTRL+C. then
