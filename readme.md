@@ -14,6 +14,9 @@ to create network on docker for the containers to run on
 ## First Run
 
 **1 - run the server on docker**
+    $ docker-compose up
+
+wait for all the builds to complete then terminate with `CTRL+C. then
 
     $ docker-compose up -d
 
@@ -127,3 +130,6 @@ Cache is applied to reduce the request time for resources where applicable. Sinc
 # DEVELOPMENT
 
 Redis server has to be accessible to get cache working in development.
+
+## *TODO*
+Extend caching to diagnosis list. Page has to be cached on first request and cached data return on subsequent request. Page cache will have to be invalidated on create, update and delete of diagnosis.
