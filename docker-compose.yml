@@ -83,12 +83,12 @@ services:
     depends_on:
       - cd10
   
-volumes:
-  postgres_data:
-    external: true
-  # for sockets
-  tmp:
-    external: true
+# volumes:
+#   postgres_data:
+#     external: true
+#   # for sockets
+#   tmp:
+#     external: true
 
 networks:
   challenge-bridge:

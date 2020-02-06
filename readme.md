@@ -21,13 +21,26 @@ to create network on docker for the containers to run on
 
     $ docker-compose exec cd10 /code/migration.sh
 
+on permission error (starting container process caused... permission error)
+
+    $ docker-compose exec -u root cd10 sh -c "python manage.py makemigrations"
+    $ docker-compose exec -u root cd10 sh -c "python manage.py migrate"
+
 **3 - collect static files**
 
     $ docker-compose exec cd10 /code/collect_static.sh
 
+on permission error (starting container process caused... permission error)
+    
+    $ docker-compose exec -u root cd10 sh -c "python manage.py collectstatic"
+
 **4 - load initial data**
 
     $ docker-compose exec cd10 /code/load_data.sh
+
+on permission error (starting container process caused... permission error)
+
+    $ docker-compose exec -u root cd10 sh -c "python manage.py loaddata init-data.json"
 
 ## Subsequent runs
     $ docker-compose up -d

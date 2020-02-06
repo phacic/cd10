@@ -22,7 +22,7 @@ RUN pip install -r requirements.txt
 COPY . /code/
 
 # make script executable
-RUN chmod u+x /code/collect_static.sh /code/migration.sh
+RUN chmod u+x /code/collect_static.sh /code/migration.sh /code/load_data.sh
 
 # mount point for other files
 RUN mkdir -p /config
