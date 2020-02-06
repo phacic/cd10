@@ -7,6 +7,10 @@ Install
 
 Docker is required to run the following commands.
 
+    $ docker network create --gateway 172.16.2.1 --subnet 172.16.2.0/24 challenge-bridge
+
+to create network on docker for the containers to run on
+
 ## First Run
 
 **1 - run the server on docker**
@@ -27,6 +31,26 @@ Docker is required to run the following commands.
 
 ## Subsequent runs
     $ docker-compose up -d
+
+## On Windows
+
+Enable shared volumes under Docker settings and in the `docker-compose-win.yml`replace the volumes drive letter with the drive you shared. E.g. if you shared c:
+
+     volumes:
+      - e:/data/redis/r1:/data
+
+     volumes:
+      - c:/data/redis/r1:/data
+
+then for postgreSQL to work run the following to create the required volumne
+
+    # docker volume create --name=postgres_data
+
+So when running the commands under run you do this to specify the file
+
+    $ docker-compose -f docker-compose-win.yml up -d
+
+
 
 
 # **Endpoints**

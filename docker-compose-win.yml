@@ -1,4 +1,6 @@
 # docker network create --gateway 172.16.2.1 --subnet 172.16.2.0/24 challenge-bridge
+# docker volume create --name=postgres_data
+# docker volume create --name=tmp
 
 version: "3"
 services:
@@ -17,7 +19,7 @@ services:
     networks:
       - challenge-bridge
     volumes:
-      - ./postgres/data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
 
   redis:
     build:
@@ -31,7 +33,7 @@ services:
     networks:
       - challenge-bridge
     volumes:
-      - ./redis/data:/data
+      - e:/data/redis/r1:/data
 
   cd10:
     build:
@@ -57,9 +59,9 @@ services:
       - db_password=single
       - redis_host=redis
     volumes:
-      - ./django/data:/code/media
-      - .django/data:/code/static
-      - ./logs:/var/log/
+      - e:/data/django/media:/code/media
+      - e:/data/django/static:/code/static
+      - e:/data/logs:/var/log/
       - .:/code
     depends_on:
       - db
@@ -73,9 +75,10 @@ services:
     command: [nginx, '-g', 'daemon off;']
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-      - ./django/media:/code/media
-      - ./django/static:/code/static
-      - ./logs:/var/log/
+      - e:/data/django/media:/code/media
+      - e:/data/django/static:/code/static
+      - e:/data/logs:/var/log/
+      - tmp:/tmp
     networks:
       - challenge-bridge
     ports:
